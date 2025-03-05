@@ -28,13 +28,12 @@ void* generate_points(void *arg) {
 	pthread_mutex_lock(&mutex);
 	points_in_circle += count;
 	pthread_mutex_unlock(&mutex);
-	printf("Thread completed. Points in circle: %d\n", points_in_circle); // Debug print
 	return NULL;
 }
 
 int main(int argc, char *argv[]) {
 	if (argc != 3) {
-		printf(
+		fprintf(stderr,
 				"Usage: %s <integer value for NUMBER_OF_DARTS> <integer value for NUMBER_OF_THREADS>\n",
 				argv[0]);
 		return 1;
@@ -44,12 +43,12 @@ int main(int argc, char *argv[]) {
 	int num_of_Threads = atoi(argv[2]);
 
 	if (num_of_Points < 5000000) {
-		printf("The number of darts must be >= 5000000\n");
+		fprintf(stderr, "The number of darts must be >= 5000000\n");
 		return 1;
 	}
 
 	if (num_of_Threads < 2) {
-		printf("The number of threads must be >= 2\n");
+		fprintf(stderr, "The number of threads must be >= 2\n");
 		return 1;
 	}
 
